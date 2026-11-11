@@ -40,7 +40,9 @@ def call_ai_api(prompt_text):
     try:
         response = requests.post(DAHL_URL, json=payload, headers=headers)
         res_data = response.json()
-        return res_data["choices"]["message"]["content"]
+        
+        # اصلاح شد: اضافه کردن [0] برای خواندن از لیست choices
+        return res_data["choices"][0]["message"]["content"]
     except Exception as e:
         print(f"API Error: {e}")
         return "متأسفانه در ارتباط با هوش مصنوعی خطایی رخ داد."
